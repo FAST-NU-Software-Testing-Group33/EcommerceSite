@@ -9,15 +9,9 @@ And: User clicks register button
 Then: An error message should be displayed
 */
 
-Scenario('password mismatch', ({ I }) => {
-	I.amOnPage('/');
-	I.click('Account');
-	I.click('CreateAnAccount');
-	I.fillField('#name', 'Hashir');
-	I.fillField('#email', 'hashir@gmail.com');
-	I.fillField('#password', 'hashir12345');
-	I.fillField('#cPassword', 'HASHIR12345');
-	I.click('Register');
+Scenario('password mismatch', ({ I, homePage }) => {
+	homePage.OpenAccountDialog();
+	homePage.CreateAccount('Hashir', 'hashir@gmail.com', 'hashir12345', 'HASHIR12345');
 	I.see("Password doesn't match");
 });
 
@@ -29,14 +23,8 @@ And: User clicks register button
 Then: An error message should be displayed
 */
 
-Scenario('incorrect email', ({ I }) => {
-	I.amOnPage('/');
-	I.click('Account');
-	I.click('CreateAnAccount');
-	I.fillField('#name', 'Hashir');
-	I.fillField('#email', 'hashir@gmail');
-	I.fillField('#password', 'hashir12345');
-	I.fillField('#cPassword', 'hashir12345');
-	I.click('Register');
+Scenario('incorrect email', ({ I, homePage }) => {
+	homePage.OpenAccountDialog();
+	homePage.CreateAccount('Hashir', 'hashir@gmail', 'hashir12345', 'hashir12345');
 	I.see("Email is not valid");
 });

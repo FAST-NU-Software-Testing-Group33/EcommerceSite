@@ -8,12 +8,8 @@ And: User clicks login button
 Then: An error message should be displayed
 */
 
-Scenario('incorrect credentials', ({ I }) => {
-	I.amOnPage('/');
-	I.click('Account');
-	I.click('Login');
-	I.fillField('#name', 'doesnotexist@gmail.com');
-	I.fillField('#password', 'doesnotexist12345');
-	I.click('Login');
+Scenario('incorrect credentials', ({ I, homePage }) => {
+	homePage.OpenAccountDialog();
+	homePage.Login('doesnotexist@gmail.com', 'doesnotexist12345');
 	I.see("Invalid email or password");
 });
